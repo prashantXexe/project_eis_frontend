@@ -3,7 +3,7 @@ export default function LiveStream({ url }) {
     <div
       style={{
         width: "100%",
-        height: "300px",              // 🔥 SAME HEIGHT
+        height: "300px",
         background: "#020617",
         padding: "0px",
         borderRadius: "12px",
@@ -12,23 +12,27 @@ export default function LiveStream({ url }) {
         boxShadow: "0 0 10px rgba(0,0,0,0.5)"
       }}
     >
-      <h4 style={{ marginBottom: "8px" }}>Live Stream</h4>
+      <h4 style={{ marginBottom: "8px", padding: "8px" }}>
+        Live Stream
+      </h4>
 
       <div
         style={{
-          flex: 1,                   // 🔥 FILL FULL HEIGHT
+          flex: 1,
           background: "#000",
           borderRadius: "8px",
-          overflow: "hidden"
+          overflow: "hidden",
+          position: "relative"
         }}
       >
-        <img
+        <iframe
           src={url || import.meta.env.VITE_STREAM_URL}
-          alt="Live Stream"
+          title="Live Stream"
           style={{
             width: "100%",
-            height: "100%",          // 🔥 IMPORTANT
-            objectFit: "cover"
+            height: "100%",
+            border: "none",
+            objectFit: "contain" // ✅ full video visible
           }}
         />
       </div>
