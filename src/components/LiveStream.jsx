@@ -3,22 +3,18 @@ export default function LiveStream({ url }) {
     <div
       style={{
         width: "100%",
-        height: "300px",
         background: "#020617",
-        padding: "0px",
         borderRadius: "12px",
-        display: "flex",
-        flexDirection: "column",
+        padding: "10px",
         boxShadow: "0 0 10px rgba(0,0,0,0.5)"
       }}
     >
-      <h4 style={{ marginBottom: "8px", padding: "8px" }}>
-        Live Stream
-      </h4>
+      <h4 style={{ marginBottom: "10px" }}>Live Stream</h4>
 
       <div
         style={{
-          flex: 1,
+          width: "100%",
+          aspectRatio: "16 / 9",
           background: "#000",
           borderRadius: "8px",
           overflow: "hidden",
@@ -29,10 +25,12 @@ export default function LiveStream({ url }) {
           src={url || import.meta.env.VITE_STREAM_URL}
           title="Live Stream"
           style={{
-            width: "100%",
-            height: "100%",
+            width: "140%",        // 🔥 zoom out effect
+            height: "140%",
             border: "none",
-            objectFit: "contain" // ✅ full video visible
+            position: "absolute",
+            top: "-20%",          // 🔥 center vertically
+            left: "-20%"          // 🔥 center horizontally
           }}
         />
       </div>
