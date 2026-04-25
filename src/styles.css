@@ -31,7 +31,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat !important;
+  background: red !important;
   position: relative;
   overflow: hidden;
 }
