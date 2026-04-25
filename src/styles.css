@@ -169,6 +169,17 @@ button {
   border-radius: 10px;
 }
 
+/* 🔥 FORCE INPUT TEXT COLOR (WORKS EVEN WITH AUTOFILL) */
+.form-group input,
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:focus,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:active {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  caret-color: #000;
+}
+
 /* AUTOFILL FIX */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.15) inset !important;
