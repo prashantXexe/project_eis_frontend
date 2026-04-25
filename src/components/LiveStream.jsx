@@ -14,23 +14,19 @@ export default function LiveStream({ url }) {
       <div
         style={{
           width: "100%",
-          aspectRatio: "16 / 9",
+          aspectRatio: "16 / 9",   // 🔥 maintain video ratio
           background: "#000",
           borderRadius: "8px",
-          overflow: "hidden",
-          position: "relative"
+          overflow: "hidden"
         }}
       >
-        <iframe
+        <img
           src={url || import.meta.env.VITE_STREAM_URL}
-          title="Live Stream"
+          alt="Live Stream"
           style={{
-            width: "140%",        // 🔥 zoom out effect
-            height: "140%",
-            border: "none",
-            position: "absolute",
-            top: "-20%",          // 🔥 center vertically
-            left: "-20%"          // 🔥 center horizontally
+            width: "100%",
+            height: "100%",
+            objectFit: "contain"  // 🔥 FULL video visible (no cut)
           }}
         />
       </div>
