@@ -96,7 +96,7 @@ button {
   border: 1px solid rgba(255,255,255,0.25);
 
   background: rgba(255,255,255,0.12);
-  color: black;
+  color: #000;
 
   outline: none;
   font-size: 14px;
@@ -140,8 +140,8 @@ button {
 
 /* FIX AUTOFILL COLOR */
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.12) inset !important;
-  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.9) inset !important;
+  -webkit-text-fill-color: #000 !important;
 }
 
 /* EYE ICON */
