@@ -61,7 +61,6 @@ export default function Login() {
         return;
       }
 
-      // Save user data
       localStorage.setItem("role", role);
       localStorage.setItem("username", username);
 
@@ -87,13 +86,11 @@ export default function Login() {
   return (
     <div className="login-wrapper">
 
-      {/* LOGIN CARD */}
       <div className="login-card">
-        <h2>⚡ Surveillance System</h2>
-        <p className="subtitle">Secure Access Portal</p>
+        <h2>Login</h2>
 
         {/* USERNAME */}
-        <div className="form-group">
+        <div className="input-group">
           <input
             type="text"
             required
@@ -104,7 +101,7 @@ export default function Login() {
         </div>
 
         {/* PASSWORD */}
-        <div className="form-group">
+        <div className="input-group">
           <input
             type={showPassword ? "text" : "password"}
             required
@@ -121,17 +118,24 @@ export default function Login() {
           </span>
         </div>
 
+        {/* OPTIONS */}
+        <div className="options">
+          <label>
+            <input type="checkbox" /> Remember Me
+          </label>
+          <span className="forgot">Forgot Password</span>
+        </div>
+
         {/* BUTTON */}
         <button
           className="login-btn"
           onClick={handleLogin}
           disabled={loading}
         >
-          {loading ? "Please wait..." : "Login"}
+          {loading ? "Please wait..." : "Log in"}
         </button>
       </div>
 
-      {/* TOAST MESSAGE */}
       {message && <div className="toast">{message}</div>}
     </div>
   );
