@@ -25,9 +25,9 @@ button {
   cursor: pointer;
 }
 
-/* ================= PREMIUM LOGIN ================= */
+/* ================= LOGIN FINAL ================= */
 
-/* BACKGROUND (LAYERED DEPTH) */
+/* BACKGROUND (CLEAN + PROFESSIONAL) */
 .login-wrapper {
   height: 100vh;
   display: flex;
@@ -35,28 +35,28 @@ button {
   align-items: center;
 
   background:
-    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(168,85,247,0.2), transparent 40%),
-    linear-gradient(rgba(2,6,23,0.9), rgba(2,6,23,1)),
+    linear-gradient(
+      to bottom right,
+      rgba(2,6,23,0.85),
+      rgba(15,23,42,0.95)
+    ),
     url("https://images.unsplash.com/photo-1519681393784-d120267933ba")
-    no-repeat center/cover;
+    no-repeat center center / cover;
 
+  position: relative;
   overflow: hidden;
 }
 
-/* FLOATING LIGHT */
+/* SOFT CENTER LIGHT */
 .login-wrapper::before {
   content: "";
   position: absolute;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(99,102,241,0.15), transparent);
-  animation: floatGlow 15s infinite alternate ease-in-out;
-}
-
-@keyframes floatGlow {
-  0% { transform: translate(-30%, -20%); }
-  100% { transform: translate(40%, 30%); }
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.2), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* CARD */
@@ -65,49 +65,44 @@ button {
   z-index: 2;
 
   width: 360px;
-  padding: 45px;
-  border-radius: 22px;
+  padding: 42px;
+  border-radius: 20px;
 
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.12),
     rgba(255,255,255,0.05)
   );
 
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.2);
 
-  box-shadow:
-    0 25px 80px rgba(0,0,0,0.7),
-    inset 0 1px 1px rgba(255,255,255,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 
   text-align: center;
-
-  animation: fadeIn 0.7s ease;
 }
 
 /* TITLE */
 .login-card h2 {
   margin-bottom: 35px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+}
+
+/* INPUT GROUP */
+.form-group {
+  position: relative;
+  margin-bottom: 22px;
 }
 
 /* INPUT */
-.form-group {
-  position: relative;
-  margin-bottom: 24px;
-}
-
 .form-group input {
   width: 100%;
-  padding: 14px 42px 14px 14px;
+  padding: 14px 40px 14px 14px;
 
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.2);
 
   background: rgba(255,255,255,0.12);
-  color: #fff;
+  color: white;
 
   font-size: 14px;
   outline: none;
@@ -116,15 +111,10 @@ button {
   transition: 0.25s ease;
 }
 
-/* INPUT HOVER */
-.form-group input:hover {
-  border-color: rgba(255,255,255,0.5);
-}
-
 /* INPUT FOCUS */
 .form-group input:focus {
   border-color: #8b5cf6;
-  box-shadow: 0 0 14px rgba(139,92,246,0.6);
+  box-shadow: 0 0 10px rgba(139,92,246,0.5);
 }
 
 /* LABEL */
@@ -135,39 +125,47 @@ button {
   font-size: 13px;
   color: #cbd5f5;
   transition: 0.25s;
+  pointer-events: none;
 }
 
-/* FLOAT */
+/* FLOAT FIX (NO OVERLAP) */
 .form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label {
-  top: -9px;
+.form-group input:not(:placeholder-shown) + label,
+.form-group input:-webkit-autofill + label {
+  top: -8px;
+  left: 12px;
   font-size: 11px;
   color: #a78bfa;
+
   background: rgba(2,6,23,0.9);
   padding: 0 6px;
   border-radius: 6px;
 }
 
-/* EYE */
+/* AUTOFILL FIX */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.12) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* EYE ICON */
 .eye {
   position: absolute;
-  right: 14px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.6;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .eye:hover {
   opacity: 1;
-  transform: translateY(-50%) scale(1.1);
 }
 
 /* BUTTON */
 .login-btn {
   width: 100%;
-  padding: 14px;
+  padding: 13px;
   border-radius: 30px;
   border: none;
 
@@ -177,16 +175,12 @@ button {
 
   cursor: pointer;
   transition: 0.25s ease;
-  margin-top: 18px;
+  margin-top: 15px;
 }
 
 .login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99,102,241,0.5);
-}
-
-.login-btn:active {
-  transform: scale(0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(99,102,241,0.4);
 }
 
 /* TOAST */
@@ -194,19 +188,7 @@ button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.8);
   padding: 12px 20px;
   border-radius: 10px;
-}
-
-/* ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
