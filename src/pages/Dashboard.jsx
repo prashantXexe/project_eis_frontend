@@ -71,7 +71,7 @@ export default function Dashboard() {
 
         {/* 🎥 Live Stream */}
         <div style={styles.card}>
-          <LiveStream url="https://delegate-cricket-trapping.ngrok-free.dev/video" />
+          <LiveStream url="https://chairs-ladder-gzip-cindy.trycloudflare.com/video" />
         </div>
 
         {/* 🖼️ Recent Images */}
