@@ -13,7 +13,6 @@ import {
 } from "firebase/firestore";
 import { app } from "../firebase";
 import "../styles.css";
-import hero from "../assets/hero.png";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -45,7 +44,6 @@ export default function Login() {
 
       const userData = snapshot.docs[0].data();
       const email = userData.email;
-      const role = userData.role;
 
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -62,9 +60,6 @@ export default function Login() {
         return;
       }
 
-      localStorage.setItem("role", role);
-      localStorage.setItem("username", username);
-
       setMessage("Login successful");
 
       setTimeout(() => {
@@ -72,11 +67,7 @@ export default function Login() {
       }, 1000);
 
     } catch (error) {
-      if (error.code === "auth/wrong-password") {
-        setMessage("Wrong password");
-      } else {
-        setMessage(error.message);
-      }
+      setMessage(error.message);
     }
 
     setLoading(false);
@@ -85,46 +76,45 @@ export default function Login() {
   return (
     <div className="login-wrapper">
 
-      {/* Background */}
-      <div className="bg-overlay"></div>
-
-      {/* Card */}
-      <div className="login-box">
-        <img src={hero} alt="logo" className="logo" />
-
+      <div className="login-card">
         <h2>Surveillance System</h2>
         <p className="subtitle">Secure Access Portal</p>
 
         {/* Username */}
-        <div className="input-group">
+        <div className="form-group">
           <input
             type="text"
-            placeholder="Username"
+            required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          <label>Username</label>
         </div>
 
         {/* Password */}
-        <div className="input-group">
+        <div className="form-group">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <span onClick={() => setShowPassword(!showPassword)}>
+          <label>Password</label>
+
+          <span
+            className="eye"
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? "🙈" : "👁"}
           </span>
         </div>
 
         {/* Button */}
-        <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Signing in..." : "Login"}
+        <button className="login-btn" onClick={handleLogin}>
+          {loading ? "Please wait..." : "Login"}
         </button>
       </div>
 
-      {/* Toast */}
       {message && <div className="toast">{message}</div>}
     </div>
   );
