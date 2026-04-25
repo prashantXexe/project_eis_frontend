@@ -25,9 +25,9 @@ button {
   cursor: pointer;
 }
 
-/* ================= LOGIN FIX ================= */
+/* ================= LOGIN FIX FINAL ================= */
 
-/* BACKGROUND IMAGE */
+/* BACKGROUND */
 .login-wrapper {
   height: 100vh;
   display: flex;
@@ -38,7 +38,7 @@ button {
     no-repeat center center/cover;
 }
 
-/* GLASS CARD */
+/* CARD */
 .login-card {
   width: 350px;
   padding: 40px;
@@ -60,40 +60,54 @@ button {
   margin-bottom: 30px;
 }
 
-/* ✅ FIXED INPUT GROUP (IMPORTANT) */
+/* 🔥 IMPORTANT FIX */
 .form-group {
   position: relative;
   margin-bottom: 22px;
+  width: 100%;
 }
 
-/* INPUT */
+/* INPUT FIX */
 .form-group input {
   width: 100%;
   padding: 14px 40px 14px 12px;
+
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: rgba(255,255,255,0.08);
   color: white;
+
   outline: none;
   font-size: 14px;
+
+  box-sizing: border-box;   /* ✅ FIX OVERFLOW */
 }
 
-/* LABEL */
+/* LABEL FIX */
 .form-group label {
   position: absolute;
   top: 14px;
   left: 12px;
-  color: #94a3b8;
-  transition: 0.3s;
+
+  color: #cbd5f5;
+  font-size: 14px;
+
+  transition: 0.25s ease;
   pointer-events: none;
 }
 
-/* ✅ FLOAT FIX (NO OVERLAP) */
+/* FLOAT FIX */
 .form-group input:focus + label,
 .form-group input:not(:placeholder-shown) + label {
   top: -8px;
+  left: 10px;
   font-size: 12px;
   color: #6366f1;
+
+  background: rgba(15, 23, 42, 0.9);
+  padding: 0 4px;
+  border-radius: 4px;
 }
 
 /* EYE ICON FIX */
