@@ -12,8 +12,8 @@ import {
   getDocs
 } from "firebase/firestore";
 import { app } from "../firebase";
-import "../styles.css"; // use your existing CSS
-import hero from "../assets/hero.png"; // 👈 IMPORTANT
+import "../styles.css";
+import hero from "../assets/hero.png";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -38,7 +38,7 @@ export default function Login() {
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) {
-        setMessage("❌ User not found");
+        setMessage("User not found");
         setLoading(false);
         return;
       }
@@ -57,7 +57,7 @@ export default function Login() {
 
       if (!user.emailVerified) {
         await sendEmailVerification(user);
-        setMessage("📧 Verify your email first");
+        setMessage("Verify your email first");
         setLoading(false);
         return;
       }
@@ -65,7 +65,7 @@ export default function Login() {
       localStorage.setItem("role", role);
       localStorage.setItem("username", username);
 
-      setMessage("✅ Login successful");
+      setMessage("Login successful");
 
       setTimeout(() => {
         window.location.href = "/";
@@ -73,7 +73,7 @@ export default function Login() {
 
     } catch (error) {
       if (error.code === "auth/wrong-password") {
-        setMessage("❌ Wrong password");
+        setMessage("Wrong password");
       } else {
         setMessage(error.message);
       }
@@ -83,57 +83,48 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-wrapper">
 
-      {/* LEFT SIDE (IMAGE) */}
-      <div className="left-panel">
-        <img src={hero} alt="hero" className="hero-img" />
-        <h1>Surveillance AI</h1>
-        <p>Smart Security Monitoring System</p>
-      </div>
+      {/* Background */}
+      <div className="bg-overlay"></div>
 
-      {/* RIGHT SIDE */}
-      <div className="right-panel">
-        <div className="login-card">
-          <h2>Welcome Back</h2>
-          <p className="subtitle">Login to continue</p>
+      {/* Card */}
+      <div className="login-box">
+        <img src={hero} alt="logo" className="logo" />
 
-          <div className="input-box">
-            <span>👤</span>
-            <input
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
+        <h2>Surveillance System</h2>
+        <p className="subtitle">Secure Access Portal</p>
 
-          <div className="input-box">
-            <span>🔒</span>
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              className="toggle-btn"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </button>
-          </div>
-
-          <button
-            className="login-btn"
-            onClick={handleLogin}
-            disabled={loading}
-          >
-            {loading ? "Please wait..." : "Login"}
-          </button>
+        {/* Username */}
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
+
+        {/* Password */}
+        <div className="input-group">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? "🙈" : "👁"}
+          </span>
+        </div>
+
+        {/* Button */}
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? "Signing in..." : "Login"}
+        </button>
       </div>
 
+      {/* Toast */}
       {message && <div className="toast">{message}</div>}
     </div>
   );
