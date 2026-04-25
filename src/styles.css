@@ -35,12 +35,7 @@ button {
   position: relative;
   overflow: hidden;
 
-  background: linear-gradient(
-      rgba(2,6,23,0.85),
-      rgba(2,6,23,0.95)
-    ),
-    url("https://images.unsplash.com/photo-1526401485004-2fda9f3d9c4b")
-    no-repeat center center / cover !important;
+  background: red !important
 }
 
 /* 🌌 GRADIENT FLOW */
