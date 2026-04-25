@@ -31,9 +31,32 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: red !important;
+
+  background-image: url("https://picsum.photos/1920/1080");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   position: relative;
   overflow: hidden;
+}
+
+/* overlay separately */
+.login-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(2,6,23,0.85),
+    rgba(2,6,23,0.95)
+  );
+  z-index: 1;
+}
+
+/* keep your login above */
+.login-box {
+  position: relative;
+  z-index: 2;
 }
 
 /* 🌌 GRADIENT FLOW */
