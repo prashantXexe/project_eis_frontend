@@ -25,7 +25,7 @@ button {
   cursor: pointer;
 }
 
-/* ================= LOGIN FIX FINAL ================= */
+/* ================= LOGIN PREMIUM ================= */
 
 /* BACKGROUND */
 .login-wrapper {
@@ -36,23 +36,43 @@ button {
 
   background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba")
     no-repeat center center/cover;
+  position: relative;
+}
+
+/* SUBTLE GLOW BACKGROUND */
+.login-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.25), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* CARD */
 .login-card {
+  position: relative;
+  z-index: 2;
+
   width: 350px;
   padding: 40px;
   border-radius: 20px;
 
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
 
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 
   text-align: center;
   color: white;
 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(99,102,241,0.2);
+
+  animation: fadeUp 0.6s ease;
 }
 
 /* TITLE */
@@ -60,31 +80,38 @@ button {
   margin-bottom: 30px;
 }
 
-/* 🔥 IMPORTANT FIX */
+/* INPUT GROUP */
 .form-group {
   position: relative;
   margin-bottom: 22px;
   width: 100%;
 }
 
-/* INPUT FIX */
+/* INPUT */
 .form-group input {
   width: 100%;
   padding: 14px 40px 14px 12px;
 
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
 
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.12);
   color: white;
 
   outline: none;
   font-size: 14px;
 
-  box-sizing: border-box;   /* ✅ FIX OVERFLOW */
+  box-sizing: border-box;
+  transition: all 0.25s ease;
 }
 
-/* LABEL FIX */
+/* INPUT FOCUS (UX BOOST) */
+.form-group input:focus {
+  border: 1px solid #6366f1;
+  box-shadow: 0 0 10px rgba(99,102,241,0.6);
+}
+
+/* LABEL */
 .form-group label {
   position: absolute;
   top: 14px;
@@ -99,7 +126,8 @@ button {
 
 /* FLOAT FIX */
 .form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label {
+.form-group input:not(:placeholder-shown) + label,
+.form-group input:-webkit-autofill + label {
   top: -8px;
   left: 10px;
   font-size: 12px;
@@ -110,13 +138,24 @@ button {
   border-radius: 4px;
 }
 
-/* EYE ICON FIX */
+/* FIX AUTOFILL COLOR */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.12) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* EYE ICON */
 .eye {
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  opacity: 0.7;
+}
+
+.eye:hover {
+  opacity: 1;
 }
 
 /* BUTTON */
@@ -126,17 +165,22 @@ button {
   border-radius: 25px;
   border: none;
 
-  background: white;
-  color: black;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
   font-weight: bold;
 
   cursor: pointer;
-  transition: 0.3s;
-  margin-top: 10px;
+  transition: all 0.25s ease;
+  margin-top: 12px;
 }
 
 .login-btn:hover {
-  background: #ddd;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(99,102,241,0.6);
+}
+
+.login-btn:active {
+  transform: scale(0.97);
 }
 
 /* TOAST */
@@ -148,4 +192,16 @@ button {
   padding: 12px 20px;
   border-radius: 10px;
   color: white;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
