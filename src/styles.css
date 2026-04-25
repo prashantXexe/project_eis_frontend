@@ -143,6 +143,116 @@ button {
   font-size: 14px;
 }
 
+/* FULL SCREEN CENTER FIX */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1e293b, #020617);
+}
+
+/* CARD */
+.login-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(124, 58, 237, 0.2);
+  text-align: center;
+  color: white;
+}
+
+/* TITLE */
+.login-card h2 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+/* FLOATING INPUT */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: white;
+  outline: none;
+}
+
+/* LABEL */
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  color: #94a3b8;
+  transform: translateY(-50%);
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+/* FLOAT EFFECT */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 12px;
+  color: #2563eb;
+}
+
+/* EYE ICON */
+.eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* BUTTON FIX (CENTERED PROPERLY) */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(124, 58, 237, 0.6);
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(30,41,59,0.9);
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+
 /* ANIMATION */
 @keyframes fadeUp {
   from {
