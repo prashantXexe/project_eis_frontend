@@ -37,13 +37,14 @@ export default function Login() {
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) {
-        setMessage("User not found");
+        setMessage("❌ User not found");
         setLoading(false);
         return;
       }
 
       const userData = snapshot.docs[0].data();
       const email = userData.email;
+      const role = userData.role;
 
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -55,19 +56,29 @@ export default function Login() {
 
       if (!user.emailVerified) {
         await sendEmailVerification(user);
-        setMessage("Verify your email first");
+        setMessage("📧 Verify your email first");
         setLoading(false);
         return;
       }
 
-      setMessage("Login successful");
+      // Save user data
+      localStorage.setItem("role", role);
+      localStorage.setItem("username", username);
+
+      setMessage("✅ Login successful");
 
       setTimeout(() => {
         window.location.href = "/";
       }, 1000);
 
     } catch (error) {
-      setMessage(error.message);
+      if (error.code === "auth/wrong-password") {
+        setMessage("❌ Wrong password");
+      } else if (error.code === "auth/too-many-requests") {
+        setMessage("⚠️ Too many attempts. Try later");
+      } else {
+        setMessage(error.message);
+      }
     }
 
     setLoading(false);
@@ -76,11 +87,12 @@ export default function Login() {
   return (
     <div className="login-wrapper">
 
+      {/* LOGIN CARD */}
       <div className="login-card">
-        <h2>Surveillance System</h2>
+        <h2>⚡ Surveillance System</h2>
         <p className="subtitle">Secure Access Portal</p>
 
-        {/* Username */}
+        {/* USERNAME */}
         <div className="form-group">
           <input
             type="text"
@@ -91,7 +103,7 @@ export default function Login() {
           <label>Username</label>
         </div>
 
-        {/* Password */}
+        {/* PASSWORD */}
         <div className="form-group">
           <input
             type={showPassword ? "text" : "password"}
@@ -109,12 +121,17 @@ export default function Login() {
           </span>
         </div>
 
-        {/* Button */}
-        <button className="login-btn" onClick={handleLogin}>
+        {/* BUTTON */}
+        <button
+          className="login-btn"
+          onClick={handleLogin}
+          disabled={loading}
+        >
           {loading ? "Please wait..." : "Login"}
         </button>
       </div>
 
+      {/* TOAST MESSAGE */}
       {message && <div className="toast">{message}</div>}
     </div>
   );
