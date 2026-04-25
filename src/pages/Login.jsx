@@ -20,7 +20,6 @@ const db = getFirestore(app);
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -61,6 +60,7 @@ export default function Login() {
         return;
       }
 
+      // Save data
       localStorage.setItem("role", role);
       localStorage.setItem("username", username);
 
@@ -86,50 +86,36 @@ export default function Login() {
   return (
     <div className="login-wrapper">
 
-      <div className="login-card">
-        <h2>Login</h2>
+      <div className="login-box">
+        <h2>Sign In</h2>
 
         {/* USERNAME */}
-        <div className="form-group">
+        <div className="input-box">
           <input
             type="text"
-            placeholder=" "
-            required
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label>Username</label>
         </div>
 
         {/* PASSWORD */}
-        <div className="form-group">
+        <div className="input-box">
           <input
-            type={showPassword ? "text" : "password"}
-            placeholder=" "
-            required
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>Password</label>
-
-          <span
-            className="eye"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? "🙈" : "👁"}
-          </span>
         </div>
 
         {/* BUTTON */}
-        <button
-          className="login-btn"
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          {loading ? "Please wait..." : "Log in"}
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? "Please wait..." : "Sign in"}
         </button>
       </div>
 
+      {/* MESSAGE */}
       {message && <div className="toast">{message}</div>}
     </div>
   );
