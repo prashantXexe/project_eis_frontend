@@ -11,14 +11,15 @@ export default function LiveStream({ url }) {
     >
       <h4 style={{ marginBottom: "10px" }}>Live Stream</h4>
 
-      {/* 🔥 Aspect Ratio Box */}
+      {/* 🔥 Square Container */}
       <div
         style={{
           width: "100%",
-          aspectRatio: "16 / 9",   // ✅ FIX (important)
+          aspectRatio: "1 / 1",   // ✅ square box
           background: "#000",
           borderRadius: "8px",
-          overflow: "hidden"
+          overflow: "hidden",
+          position: "relative"
         }}
       >
         <iframe
@@ -27,7 +28,9 @@ export default function LiveStream({ url }) {
           style={{
             width: "100%",
             height: "100%",
-            border: "none"
+            border: "none",
+            transform: "scale(0.75)",   // 🔥 zoom out to fit
+            transformOrigin: "top left"
           }}
         />
       </div>
