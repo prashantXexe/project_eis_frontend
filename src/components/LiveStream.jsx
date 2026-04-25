@@ -3,26 +3,22 @@ export default function LiveStream({ url }) {
     <div
       style={{
         width: "100%",
-        height: "300px",
         background: "#020617",
-        padding: "0px",
         borderRadius: "12px",
-        display: "flex",
-        flexDirection: "column",
+        padding: "10px",
         boxShadow: "0 0 10px rgba(0,0,0,0.5)"
       }}
     >
-      <h4 style={{ marginBottom: "8px", padding: "8px" }}>
-        Live Stream
-      </h4>
+      <h4 style={{ marginBottom: "10px" }}>Live Stream</h4>
 
+      {/* 🔥 Aspect Ratio Box */}
       <div
         style={{
-          flex: 1,
+          width: "100%",
+          aspectRatio: "16 / 9",   // ✅ FIX (important)
           background: "#000",
           borderRadius: "8px",
-          overflow: "hidden",
-          position: "relative"
+          overflow: "hidden"
         }}
       >
         <iframe
@@ -31,8 +27,7 @@ export default function LiveStream({ url }) {
           style={{
             width: "100%",
             height: "100%",
-            border: "none",
-            objectFit: "contain" // ✅ full video visible
+            border: "none"
           }}
         />
       </div>
