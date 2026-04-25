@@ -90,9 +90,10 @@ export default function Login() {
         <h2>Login</h2>
 
         {/* USERNAME */}
-        <div className="input-group">
+        <div className="form-group">
           <input
             type="text"
+            placeholder=" "
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -101,9 +102,10 @@ export default function Login() {
         </div>
 
         {/* PASSWORD */}
-        <div className="input-group">
+        <div className="form-group">
           <input
             type={showPassword ? "text" : "password"}
+            placeholder=" "
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -116,14 +118,6 @@ export default function Login() {
           >
             {showPassword ? "🙈" : "👁"}
           </span>
-        </div>
-
-        {/* OPTIONS */}
-        <div className="options">
-          <label>
-            <input type="checkbox" /> Remember Me
-          </label>
-          <span className="forgot">Forgot Password</span>
         </div>
 
         {/* BUTTON */}
