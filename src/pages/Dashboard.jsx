@@ -71,7 +71,7 @@ export default function Dashboard() {
 
         {/* 🎥 Live Stream */}
         <div style={styles.card}>
-          <LiveStream url="https://reason-sink-assignments-spectacular.trycloudflare.com/video" />
+          <LiveStream url="https://copy-rim-relaxation-pose.trycloudflare.com/video" />
         </div>
 
         {/* 🖼️ Recent Images */}
