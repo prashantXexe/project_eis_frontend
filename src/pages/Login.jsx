@@ -12,7 +12,6 @@ import {
   getDocs
 } from "firebase/firestore";
 import { app } from "../firebase";
-import { useNavigate } from "react-router-dom";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -24,14 +23,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const navigate = useNavigate();
-
   const handleLogin = async () => {
     if (loading) return;
     setLoading(true);
 
     try {
-      // 🔍 Find user from Firestore
       const q = query(
         collection(db, "users"),
         where("username", "==", username)
@@ -49,7 +45,6 @@ export default function Login() {
       const email = userData.email;
       const role = userData.role;
 
-      // 🔐 Login
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -58,27 +53,21 @@ export default function Login() {
 
       const user = userCredential.user;
 
-      // 📧 Email verification
       if (!user.emailVerified) {
         await sendEmailVerification(user);
-
-        setMessage(
-          "📧 Verification email sent. Please verify and come back."
-        );
-
+        setMessage("📧 Verification email sent. Please verify first.");
         setLoading(false);
         return;
       }
 
-      // ✅ Save role + login
       localStorage.setItem("role", role);
       localStorage.setItem("username", username);
 
       setMessage("✅ Login successful");
 
       setTimeout(() => {
-  window.location.href = "/";
-}, 1000);
+        window.location.href = "/";
+      }, 1000);
 
     } catch (error) {
       if (error.code === "auth/wrong-password") {
@@ -96,32 +85,34 @@ export default function Login() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <h2 style={styles.title}>🔐 Surveillance Login</h2>
-        <p style={styles.subtitle}>Secure Monitoring System</p>
+        <h2 style={styles.title}>🛡 Surveillance System</h2>
+        <p style={styles.subtitle}>Secure Monitoring Login</p>
 
         {/* Username */}
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={styles.input}
-        />
+        <div style={styles.inputGroup}>
+          <input
+            placeholder="Enter Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={styles.input}
+          />
+        </div>
 
         {/* Password */}
-        <div style={{ position: "relative", marginBottom: "12px" }}>
+        <div style={styles.inputGroup}>
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ ...styles.input, marginBottom: "0" }}
+            style={styles.input}
           />
 
           <span
             onClick={() => setShowPassword(!showPassword)}
             style={styles.showBtn}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? "🙈" : "👁"}
           </span>
         </div>
 
@@ -131,86 +122,103 @@ export default function Login() {
           style={styles.button}
           disabled={loading}
         >
-          {loading ? "Please wait..." : "Login"}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </div>
 
-      {/* Popup */}
+      {/* Toast Message */}
       {message && <div style={styles.popup}>{message}</div>}
     </div>
   );
 }
 
-// 🎨 Styles
+// 🎨 MODERN UI STYLES
 const styles = {
   page: {
     height: "100vh",
-    background: "linear-gradient(135deg, #020617, #0f172a)",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    background:
+      "linear-gradient(-45deg, #0f172a, #020617, #1e293b, #020617)",
+    backgroundSize: "400% 400%",
+    animation: "gradientBG 12s ease infinite"
   },
 
   card: {
-    width: "320px",
-    padding: "30px",
-    borderRadius: "12px",
-    background: "#020617",
-    boxShadow: "0 0 25px rgba(0,0,0,0.6)",
+    width: "360px",
+    padding: "35px",
+    borderRadius: "18px",
+    background: "rgba(255,255,255,0.05)",
+    backdropFilter: "blur(18px)",
+    WebkitBackdropFilter: "blur(18px)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
     textAlign: "center"
   },
 
   title: {
-    color: "white",
-    marginBottom: "5px"
+    color: "#fff",
+    marginBottom: "5px",
+    fontWeight: "600",
+    fontSize: "20px"
   },
 
   subtitle: {
-    fontSize: "12px",
+    fontSize: "13px",
     color: "#94a3b8",
-    marginBottom: "20px"
+    marginBottom: "25px"
+  },
+
+  inputGroup: {
+    position: "relative",
+    marginBottom: "15px"
   },
 
   input: {
     width: "100%",
-    padding: "10px",
-    marginBottom: "12px",
-    borderRadius: "6px",
-    border: "1px solid #334155",
-    background: "#0f172a",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(255,255,255,0.05)",
     color: "white",
-    outline: "none"
+    outline: "none",
+    fontSize: "14px",
+    transition: "0.3s"
   },
 
   showBtn: {
     position: "absolute",
-    right: "10px",
+    right: "12px",
     top: "50%",
     transform: "translateY(-50%)",
     cursor: "pointer",
-    color: "#94a3b8",
-    fontSize: "13px"
+    color: "#cbd5f5"
   },
 
   button: {
     width: "100%",
-    padding: "10px",
-    borderRadius: "6px",
+    padding: "12px",
+    borderRadius: "8px",
     border: "none",
-    background: "#2563eb",
+    background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
     color: "white",
+    fontWeight: "600",
     cursor: "pointer",
-    fontWeight: "bold"
+    transition: "0.3s",
+    marginTop: "10px"
   },
 
   popup: {
     position: "fixed",
     bottom: "20px",
     right: "20px",
-    background: "#1e293b",
+    background: "rgba(30, 41, 59, 0.9)",
+    backdropFilter: "blur(10px)",
     color: "white",
     padding: "12px 20px",
-    borderRadius: "8px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.5)"
+    borderRadius: "10px",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.4)",
+    fontSize: "14px"
   }
 };
