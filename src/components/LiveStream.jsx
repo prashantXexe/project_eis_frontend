@@ -3,19 +3,22 @@ export default function LiveStream({ url }) {
     <div
       style={{
         width: "100%",
+        height: "300px",
         background: "#020617",
+        padding: "0px",
         borderRadius: "12px",
-        padding: "10px",
+        display: "flex",
+        flexDirection: "column",
         boxShadow: "0 0 10px rgba(0,0,0,0.5)"
       }}
     >
-      <h4 style={{ marginBottom: "10px" }}>Live Stream</h4>
+      <h4 style={{ marginBottom: "8px", padding: "8px" }}>
+        Live Stream
+      </h4>
 
-      {/* 🔥 Square Container */}
       <div
         style={{
-          width: "100%",
-          aspectRatio: "1 / 1",   // ✅ square box
+          flex: 1,
           background: "#000",
           borderRadius: "8px",
           overflow: "hidden",
@@ -29,8 +32,7 @@ export default function LiveStream({ url }) {
             width: "100%",
             height: "100%",
             border: "none",
-            transform: "scale(0.75)",   // 🔥 zoom out to fit
-            transformOrigin: "top left"
+            objectFit: "contain" // ✅ full video visible
           }}
         />
       </div>
