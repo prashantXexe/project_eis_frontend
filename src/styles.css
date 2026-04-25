@@ -25,7 +25,7 @@ button {
   cursor: pointer;
 }
 
-/* ================= LOGIN WRAPPER (3D BACKGROUND) ================= */
+/* ================= LOGIN WRAPPER (FIXED 3D BACKGROUND) ================= */
 .login-wrapper {
   height: 100vh;
   display: flex;
@@ -41,67 +41,43 @@ button {
   overflow: hidden;
 }
 
-/* overlay separately */
+/* 🔥 DARK OVERLAY (LAYER 1) */
 .login-wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    rgba(2,6,23,0.85),
-    rgba(2,6,23,0.95)
+    rgba(2,6,23,0.7),
+    rgba(2,6,23,0.9)
   );
   z-index: 1;
 }
 
-/* keep your login above */
-.login-box {
-  position: relative;
-  z-index: 2;
-}
-
-/* 🌌 GRADIENT FLOW */
-.login-wrapper::before {
+/* 🌌 MOVING LIGHT (LAYER 2) */
+.login-wrapper::after {
   content: "";
   position: absolute;
   width: 200%;
   height: 200%;
 
   background:
-    radial-gradient(circle at 30% 30%, rgba(14,165,233,0.3), transparent 40%),
-    radial-gradient(circle at 70% 70%, rgba(99,102,241,0.25), transparent 40%),
-    radial-gradient(circle at 50% 50%, #020617, #020617);
+    radial-gradient(circle at 30% 30%, rgba(56,189,248,0.25), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(99,102,241,0.2), transparent 40%);
 
   animation: moveGradient 18s ease-in-out infinite alternate;
+  z-index: 2;
 }
 
-/* 💡 FLOATING LIGHT BLOB */
-.login-wrapper::after {
-  content: "";
-  position: absolute;
-  width: 700px;
-  height: 700px;
-
-  background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 60%);
-  filter: blur(100px);
-
-  animation: floatBlob 12s ease-in-out infinite alternate;
-}
-
-/* ANIMATIONS */
+/* ANIMATION */
 @keyframes moveGradient {
   0% { transform: translate(0%, 0%); }
   100% { transform: translate(-20%, -20%); }
 }
 
-@keyframes floatBlob {
-  0% { transform: translate(-30%, -20%) scale(1); }
-  100% { transform: translate(40%, 30%) scale(1.2); }
-}
-
 /* ================= LOGIN BOX ================= */
 .login-box {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   width: 340px;
   padding: 40px;
