@@ -25,7 +25,7 @@ button {
   cursor: pointer;
 }
 
-/* ================= LOGIN WRAPPER (FIXED 3D BACKGROUND) ================= */
+/* ================= LOGIN WRAPPER ================= */
 .login-wrapper {
   height: 100vh;
   display: flex;
@@ -39,39 +39,50 @@ button {
 
   position: relative;
   overflow: hidden;
+
+  animation: zoomBg 30s ease-in-out infinite alternate;
 }
 
-/* 🔥 DARK OVERLAY (LAYER 1) */
+/* 🔥 DARK OVERLAY */
 .login-wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    rgba(2,6,23,0.7),
-    rgba(2,6,23,0.9)
+    rgba(2,6,23,0.75),
+    rgba(2,6,23,0.95)
   );
   z-index: 1;
 }
 
-/* 🌌 MOVING LIGHT (LAYER 2) */
+/* 💡 CENTER LIGHT GLOW (NEW) */
 .login-wrapper::after {
   content: "";
   position: absolute;
-  width: 200%;
-  height: 200%;
+  width: 500px;
+  height: 500px;
 
-  background:
-    radial-gradient(circle at 30% 30%, rgba(56,189,248,0.25), transparent 40%),
-    radial-gradient(circle at 70% 70%, rgba(99,102,241,0.2), transparent 40%);
+  background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 70%);
+  filter: blur(80px);
 
-  animation: moveGradient 18s ease-in-out infinite alternate;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: pulseLight 6s ease-in-out infinite;
   z-index: 2;
 }
 
-/* ANIMATION */
-@keyframes moveGradient {
-  0% { transform: translate(0%, 0%); }
-  100% { transform: translate(-20%, -20%); }
+/* 🌌 BACKGROUND ZOOM */
+@keyframes zoomBg {
+  0% { background-size: 100%; }
+  100% { background-size: 115%; }
+}
+
+/* 💡 LIGHT PULSE */
+@keyframes pulseLight {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 /* ================= LOGIN BOX ================= */
@@ -83,21 +94,25 @@ button {
   padding: 40px;
   border-radius: 20px;
 
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(25px);
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
 
-  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.15);
 
   box-shadow:
     0 20px 60px rgba(0,0,0,0.8),
-    0 0 40px rgba(0,150,255,0.2);
+    0 0 40px rgba(56,189,248,0.2);
 
   text-align: center;
 
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: all 0.4s ease;
 }
 
-/* 3D HOVER */
+/* HOVER EFFECT */
 .login-box:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow:
@@ -108,15 +123,21 @@ button {
 /* TITLE */
 .login-box h2 {
   margin-bottom: 30px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 /* ================= INPUT ================= */
 .input-box {
   margin-bottom: 20px;
+  position: relative;
 }
 
+/* INPUT FIELD */
 .input-box input {
   width: 100%;
   padding: 14px 16px;
@@ -133,20 +154,20 @@ button {
   transition: all 0.3s ease;
 }
 
-/* PLACEHOLDER */
-.input-box input::placeholder {
-  color: rgba(255,255,255,0.6);
-}
-
-/* HOVER */
+/* INPUT INTERACTION */
 .input-box input:hover {
   border-color: rgba(255,255,255,0.5);
 }
 
-/* FOCUS GLOW */
 .input-box input:focus {
   border-color: #38bdf8;
   box-shadow: 0 0 12px rgba(56,189,248,0.6);
+  transform: scale(1.02);
+}
+
+/* PLACEHOLDER */
+.input-box input::placeholder {
+  color: rgba(255,255,255,0.6);
 }
 
 /* ================= BUTTON ================= */
@@ -157,12 +178,13 @@ button {
   border-radius: 30px;
   border: none;
 
-  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
   color: white;
 
   font-weight: 600;
-  cursor: pointer;
+  letter-spacing: 0.5px;
 
+  cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 10px;
 }
@@ -170,7 +192,7 @@ button {
 /* BUTTON HOVER */
 .login-box button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(56,189,248,0.5);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.6);
 }
 
 /* BUTTON CLICK */
