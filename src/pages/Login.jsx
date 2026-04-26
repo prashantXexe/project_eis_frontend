@@ -20,6 +20,7 @@ const db = getFirestore(app);
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👁️ NEW
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -60,7 +61,6 @@ export default function Login() {
         return;
       }
 
-      // Save data
       localStorage.setItem("role", role);
       localStorage.setItem("username", username);
 
@@ -102,16 +102,24 @@ export default function Login() {
         {/* PASSWORD */}
         <div className="input-box">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // 👁️ toggle
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {/* 👁️ ICON */}
+          <span
+            className="eye"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "🙈" : "👁"}
+          </span>
         </div>
 
         {/* BUTTON */}
         <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Please wait..." : "Sign in"}
+          {loading ? "Signing in..." : "Sign in"}
         </button>
       </div>
 
