@@ -228,11 +228,21 @@ button {
 
   cursor: pointer;
   font-size: 16px;
-  color: rgba(255,255,255,0.8); /* 🔥 visible color */
+
+  /* 🔥 visible on light input */
+  color: #1e293b;
+
+  transition: color 0.2s ease;
 }
 
+/* 🔥 when input is focused (dark mode look) */
+.input-box input:focus ~ .eye {
+  color: #e2e8f0;
+}
+
+/* 🔥 hover effect */
 .eye:hover {
-  color: #38bdf8; /* glow effect */
+  color: #38bdf8;
 }
 
 /* ================= BUTTON ================= */
